@@ -5,7 +5,7 @@
 
 #### How to set up and use:
 
-0. Install python 3.9 and requirements.txt. Program will not work on Python 10...
+0. Install python 3.9 and requirements.txt. 
 1. You will need to generate your private key from Open Weather Map and place it either in 
 txt file like "private_owm_key.txt" or directly in code in open_weather_map.py on line
 16:

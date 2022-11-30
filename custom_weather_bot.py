@@ -3,7 +3,7 @@ import telebot
 from open_weather_map import weather_request
 from utils import getPrivateKey
 
-bot = telebot.TeleBot(getPrivateKey('private_telegram_key.txt'), parse_mode=None)
+bot = telebot.TeleBot(getPrivateKey('private_telegram_key.txt'))
 city_info_dict = {}
 
 __error_message = 'Something is wrong. Please, try again.'
