@@ -9,4 +9,4 @@ __pycache__
 /.run
 
 # OS Folders
-.DS_Store
+.DS_Store.idea
