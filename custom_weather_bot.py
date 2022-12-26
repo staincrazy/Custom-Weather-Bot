@@ -11,7 +11,9 @@ __error_message = 'Something is wrong. Please, try again.'
 
 @bot.message_handler(func=lambda message: True)
 def welcome_message(message):
-    if message.text in ('/start', '/help'):
+
+    if message.text.lower() in ('/start', '/help', 'start', 'help', 'hello'):
+
         msg = bot.reply_to(message,
                            "Hi, i'm weather bot. To check the "
                            "weather in a desired city just type in city name. Good luck!")
@@ -24,41 +26,31 @@ def welcome_message(message):
 
 
 def process_city_step(message):
+
     try:
         city = message.text
         city_info_dict['city_name'] = city
+
         if city.lower() in ('orgrimar', 'Orgrimmar', 'orgrimmar', 'Orgri', 'Orgrimar'):
             bot.reply_to(message, 'FOR THE HORDE!!!')
             return
-        msg = bot.reply_to(message, "Please specify which degree you're interested in - Celsius (c) or "
-                                    "Fahrenheit (f)?")
-        bot.register_next_step_handler(msg, process_degree_step)
+
+        bot.reply_to(message, get_weather(city_info_dict['city_name']))
+
     except Exception as e:
+
         bot.reply_to(message, f'Oops, this error happened - {e}. Starting over...')
 
 
-def process_degree_step(message):
-    try:
-        degree = message.text
+def get_weather(city_name):
 
-        if degree.lower().startswith('c'):
-            city_info_dict['degree'] = 'celsius'
-        elif degree.lower().startswith('f'):
-            city_info_dict['degree'] = 'fahrenheit'
-        else:
-            raise TypeError('Please, provide correct degree')
+    weather_report = weather_request(city_name)
 
-        bot.reply_to(message, get_weather(city_info_dict['city_name'], city_info_dict['degree']))
-
-    except Exception as e:
-        bot.reply_to(message, f'Oops, this error happened - {e}. Starting over...')
-
-
-def get_weather(city_name, degree):
-    weather_report = weather_request(city_name, degree)
     if weather_report is not None:
         return weather_report
+
     else:
+
         err_msg = __error_message
         return err_msg
 
