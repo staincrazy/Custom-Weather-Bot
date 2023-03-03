@@ -13,6 +13,9 @@ __error_message = 'Something is wrong. Please, try again.'
 
 def __reply_to(message: Any) -> None:
 
+    # To test input in real time, please, uncomment this line of code
+    print(message.text)
+
     try:
         city = message.text
         city_info_dict['city_name'] = city
@@ -31,8 +34,6 @@ def __reply_to(message: Any) -> None:
 @bot.message_handler(func = lambda message: True)
 def welcome_message(message: Any) -> None:
 
-    # To check input in real time uncomment this line of code
-    print(message.text)
 
     if message.text.lower() in ('/start', '/help', 'start', 'help', 'hello'):
 
@@ -46,6 +47,7 @@ def welcome_message(message: Any) -> None:
         bot.reply_to(message, "Don't stop me now....")
 
     else:
+
         __reply_to(message)
 
 
