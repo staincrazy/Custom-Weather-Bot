@@ -2,6 +2,7 @@ from typing import Any
 
 import telebot
 
+from get_random_pic import get_random_picture
 from open_weather_map import weather_request
 from utils import getPrivateKey
 
@@ -11,20 +12,27 @@ city_info_dict = {}
 __error_message = 'Something is wrong. Please, try again.'
 
 
-def __reply_to(message: Any) -> None:
+
+def __reply_to(message: telebot.types.Message, img_url: str|None = None) -> None:
 
     # To test input in real time, please, uncomment this line of code
-    print(message.text)
+    # print(message.text)
+
+    chat_id = message.chat.id
 
     try:
         city = message.text
         city_info_dict['city_name'] = city
 
+
         if city.lower() in ('orgrimar', 'Orgrimmar', 'orgrimmar', 'Orgri', 'Orgrimar'):
             bot.reply_to(message, 'FOR THE HORDE!!!')
             return
 
+        bot.send_photo(chat_id, get_random_picture())
+
         bot.reply_to(message, get_weather(city_info_dict['city_name']))
+
 
     except Exception as e:
 
@@ -35,8 +43,8 @@ def __reply_to(message: Any) -> None:
 def welcome_message(message: Any) -> None:
 
 
-    if message.text.lower() in ('/start', '/help', 'start', 'help', 'hello'):
 
+    if message.text.lower() in ('/start', '/help', 'start', 'help', 'hello'):
 
         msg = bot.reply_to(message,
                            "Hi, i'm weather bot. To check the "
@@ -44,11 +52,11 @@ def welcome_message(message: Any) -> None:
         bot.register_next_step_handler(msg, process_city_step)
 
     elif message.text.lower() in ('/cancel', 'stop', '/stop', 'cancel', 'exit', '/exit'):
+
         bot.reply_to(message, "Don't stop me now....")
 
     else:
-
-        __reply_to(message)
+        __reply_to(message = message)
 
 
 
