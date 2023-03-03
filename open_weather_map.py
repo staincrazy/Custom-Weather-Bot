@@ -7,13 +7,13 @@ __temp = ''
 __temp_feels = ''
 
 
-def celsius_to_fahrenheit(t):
+def celsius_to_fahrenheit(t: float|int) -> float|int:
 
     fahrenheit = (t * 9 / 5) + 32
     return fahrenheit
 
 
-def weather_request(city_name):
+def weather_request(city_name: str) -> str|None:
 
     my_key = getPrivateKey('private_owm_key.txt')
 
@@ -27,7 +27,7 @@ def weather_request(city_name):
         return None
 
 
-def api_handler(url, city_name):
+def api_handler(url: str, city_name: str) -> str:
 
     my_weather_request = requests.get(url).json()
 
@@ -38,11 +38,13 @@ def api_handler(url, city_name):
 
         fahrenheit_temp = str(celsius_to_fahrenheit(getTemp))[:4]
         fahrenheit_feels_like = str(celsius_to_fahrenheit(getTemp_feels))[:4]
+
         celsius_temp = str(getTemp)[:4]
         celsius_feels_like = str(getTemp_feels)[:4]
 
         weather_json = my_weather_request['weather']
         weather_main = weather_json[0]['main']
+
         weather_description_json = my_weather_request['weather']
         weather_description = weather_description_json[0]['description']
 
