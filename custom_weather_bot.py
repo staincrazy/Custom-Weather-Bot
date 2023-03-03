@@ -11,27 +11,7 @@ city_info_dict = {}
 __error_message = 'Something is wrong. Please, try again.'
 
 
-@bot.message_handler(func = lambda message: True)
-def welcome_message(message: Any) -> None:
-
-    # To check input in real time uncomment this line of code
-    ## print(message.text)
-
-    if message.text.lower() in ('/start', '/help', 'start', 'help', 'hello'):
-
-
-        msg = bot.reply_to(message,
-                           "Hi, i'm weather bot. To check the "
-                           "weather in a desired city just type in city name. Good luck!")
-        bot.register_next_step_handler(msg, process_city_step)
-
-    else:
-        msg = bot.reply_to(message, "To check the weather please specify city name after this message. "
-                                    "What city's weather you want to know?")
-        bot.register_next_step_handler(msg, process_city_step)
-
-
-def process_city_step(message: Any) -> None:
+def __reply_to(message: Any) -> None:
 
     try:
         city = message.text
@@ -47,6 +27,32 @@ def process_city_step(message: Any) -> None:
 
         bot.reply_to(message, f'Oops, this error happened - {e}. Starting over...')
 
+
+@bot.message_handler(func = lambda message: True)
+def welcome_message(message: Any) -> None:
+
+    # To check input in real time uncomment this line of code
+    print(message.text)
+
+    if message.text.lower() in ('/start', '/help', 'start', 'help', 'hello'):
+
+
+        msg = bot.reply_to(message,
+                           "Hi, i'm weather bot. To check the "
+                           "weather in a desired city just type in city name. Good luck!")
+        bot.register_next_step_handler(msg, process_city_step)
+
+    elif message.text.lower() in ('/cancel', 'stop', '/stop', 'cancel', 'exit', '/exit'):
+        bot.reply_to(message, "Don't stop me now....")
+
+    else:
+        __reply_to(message)
+
+
+
+def process_city_step(message: Any) -> None:
+
+    __reply_to(message)
 
 def get_weather(city_name: str) -> str:
 
