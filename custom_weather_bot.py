@@ -2,7 +2,7 @@ from typing import Any
 
 import telebot
 
-from get_random_pic import get_random_picture
+from random_events import get_random_picture, get_random_event
 from open_weather_map import weather_request
 from utils import getPrivateKey
 
@@ -29,9 +29,10 @@ def __reply_to(message: telebot.types.Message, img_url: str|None = None) -> None
             bot.reply_to(message, 'FOR THE HORDE!!!')
             return
 
-        bot.send_photo(chat_id, get_random_picture())
+        # bot.send_photo(chat_id, get_random_picture())
 
         bot.reply_to(message, get_weather(city_info_dict['city_name']))
+        bot.send_message(chat_id = chat_id, text = get_random_event())
 
 
     except Exception as e:
