@@ -1,22 +1,21 @@
 from typing import Any
-
 import telebot
-
-from random_events import get_random_picture, get_random_event
+from random_events import get_random_picture, get_random_event, get_city_data
 from open_weather_map import weather_request
+
 from utils import getPrivateKey
 
 bot = telebot.TeleBot(getPrivateKey('private_telegram_key.txt'))
 city_info_dict = {}
-
-__error_message = 'Something is wrong. Please, try again.'
-
 
 
 def __reply_to(message: telebot.types.Message, img_url: str|None = None) -> None:
 
     # To test input in real time, please, uncomment this line of code
     # print(message.text)
+
+    if img_url is None:
+        img_url = get_random_picture()
 
     chat_id = message.chat.id
 
@@ -29,10 +28,11 @@ def __reply_to(message: telebot.types.Message, img_url: str|None = None) -> None
             bot.reply_to(message, 'FOR THE HORDE!!!')
             return
 
-        # bot.send_photo(chat_id, get_random_picture())
 
         bot.reply_to(message, get_weather(city_info_dict['city_name']))
+        bot.reply_to(message, get_city_data(city))
         bot.send_message(chat_id = chat_id, text = get_random_event())
+        bot.send_photo(chat_id, img_url)
 
 
     except Exception as e:
@@ -41,8 +41,7 @@ def __reply_to(message: telebot.types.Message, img_url: str|None = None) -> None
 
 
 @bot.message_handler(func = lambda message: True)
-def welcome_message(message: Any) -> None:
-
+def welcome_message(message: telebot.types.Message) -> None:
 
 
     if message.text.lower() in ('/start', '/help', 'start', 'help', 'hello'):
@@ -61,7 +60,7 @@ def welcome_message(message: Any) -> None:
 
 
 
-def process_city_step(message: Any) -> None:
+def process_city_step(message: telebot.types.Message) -> None:
 
     __reply_to(message)
 
@@ -74,19 +73,21 @@ def get_weather(city_name: str) -> str:
 
     else:
 
-        err_msg = __error_message
-        return err_msg
+        return  'Something is wrong. Please, try again.'
 
 
 def runBot() -> None:
+
     try:
         bot.infinity_polling()
+
     except RuntimeError:
+
         print("Unhandled shut down. Experimental prototype")
 
 
-# For local usage
 
+# For local usage
 
 if __name__ == '__main__':
     runBot()

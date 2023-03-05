@@ -10,6 +10,7 @@ __temp_feels = ''
 def celsius_to_fahrenheit(t: float|int) -> float|int:
 
     fahrenheit = (t * 9 / 5) + 32
+
     return fahrenheit
 
 
@@ -48,10 +49,10 @@ def api_handler(url: str, city_name: str) -> str:
         weather_description_json = my_weather_request['weather']
         weather_description = weather_description_json[0]['description']
 
-        return f'For time: {datetime.now().strftime("%H:%m")} in {city_name} current temperature is ' \
+        return f'At: {datetime.now().strftime("%H:%m")} in {city_name} current temperature is ' \
                f'{celsius_temp} Celsius / {fahrenheit_temp} Fahrenheit ' \
-               f'(feels like {celsius_feels_like} C / {fahrenheit_feels_like} F) ' \
-               f' -   the weather is ' \
+               f'(feels like {celsius_feels_like} C / {fahrenheit_feels_like} F). ' \
+               f' The weather is ' \
                f'{weather_main} ({weather_description})'
 
     elif my_weather_request['cod'] == '404':

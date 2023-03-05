@@ -1,24 +1,24 @@
 import random
-from typing import Any
-import shutil
+
 import requests
 
 from utils import getPrivateKey
 
 private_key = getPrivateKey('private_api_ninjas_key.txt')
-url = "https://picsum.photos/600"
 
-def __get_city_pic_url(city_name: str|None = None) -> None:
+def get_city_data(city_name: str|None = None) -> str:
 
     if city_name is not None:
 
-        response = requests.get("https://api.api-ninjas.com/v1/randomimage?category=City",
-                            headers={'X-Api-Key': private_key, 'Accept': 'image/jpg'})
+        response = requests.get("https://api.api-ninjas.com/v1/city?name={}".format(city_name),
+                            headers={'X-Api-Key': private_key})
 
-        with open('img.png', 'wb') as out_file:
+        city_name = response.json()[0]['name']
+        country_name = response.json()[0]['country']
+        population = response.json()[0]['population']
 
-            shutil.copyfileobj(response.raw, out_file)
-            out_file.close()
+        return  f'Just in case you forgot: {city_name} is the city of {country_name} ' \
+                f'with the population of {population} ppl'
 
 
 def get_random_picture():
@@ -46,3 +46,8 @@ def get_random_event(year: int|None = None) -> str:
 
     return f'Did you know that in {year} - {event}'
 
+
+## This line of code can be used for requests testing
+
+if __name__ == '__main__':
+    print(get_city_data("Minsk"))
