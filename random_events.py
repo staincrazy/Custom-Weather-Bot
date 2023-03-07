@@ -8,22 +8,30 @@ private_key = getPrivateKey('private_api_ninjas_key.txt')
 
 def get_city_data(city_name: str|None = None) -> str:
 
+    city_name = str(city_name)
+
     if city_name is not None:
 
         response = requests.get("https://api.api-ninjas.com/v1/city?name={}".format(city_name),
                             headers={'X-Api-Key': private_key})
 
-        city_name = response.json()[0]['name']
-        country_name = response.json()[0]['country']
-        population = response.json()[0]['population']
+        try:
 
-        return  f'Just in case you forgot: {city_name} is the city of {country_name} ' \
-                f'with the population of {population} ppl'
+            city_name = response.json()[0]['name']
+            country_name = response.json()[0]['country']
+            population = response.json()[0]['population']
+
+            return  f'Just in case you forgot: {city_name} is the city of {country_name} ' \
+                    f'with the population of {population} ppl'
+        except:
+
+            return f'No information was found for this city - "{city_name}" =/'
 
 
 def get_random_picture():
 
     img_url = "https://random.imagecdn.app/500/150"
+
     return img_url
 
 
@@ -50,4 +58,4 @@ def get_random_event(year: int|None = None) -> str:
 ## This line of code can be used for requests testing
 
 if __name__ == '__main__':
-    print(get_city_data("Minsk"))
+    print(get_city_data('123'))
