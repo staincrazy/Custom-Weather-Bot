@@ -28,11 +28,10 @@ def __reply_to(message: telebot.types.Message, img_url: str|None = None) -> None
             bot.reply_to(message, 'FOR THE HORDE!!!')
             return
 
+        combined_reply: str = get_weather(city_info_dict['city_name']) + "\n\n" + get_city_data(city) \
+                                + "\n\n" + get_random_event()
 
-        bot.reply_to(message, get_weather(city_info_dict['city_name']))
-        bot.reply_to(message, get_city_data(city))
-        bot.send_message(chat_id = chat_id, text = get_random_event())
-        bot.send_photo(chat_id, img_url)
+        bot.reply_to(message, combined_reply)
 
 
     except Exception as e:
