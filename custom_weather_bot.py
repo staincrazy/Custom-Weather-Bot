@@ -71,7 +71,6 @@ def get_weather(city_name: str) -> str:
         return weather_report
 
     else:
-
         return  'Something is wrong. Please, try again.'
 
 

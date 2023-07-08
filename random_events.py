@@ -58,4 +58,4 @@ def get_random_event(year: int|None = None) -> str:
 ## This line of code can be used for requests testing
 
 if __name__ == '__main__':
-    print(get_city_data('123'))
+    print(get_city_data('Tbilisi'))
