@@ -56,10 +56,6 @@ def weather_request(city_name: str) -> str|None:
 
 
 
-
-
-
-
 ###====================TEST CODE HERE======================###
 def code_test():
     print('Paste here function you need to test')

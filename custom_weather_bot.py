@@ -26,6 +26,12 @@ def __reply_to(message: telebot.types.Message) -> None:
             bot.reply_to(message, 'Привет, Котик! Как дела?)')
             return
 
+        elif city.lower() in ('deepthroatovo', 'assenburg', 'assachussats', 'missititty'):
+            bot.reply_to(message, "Don't forget to use lubricant")
+
+            bot.send_photo(message.chat.id, photo=open('sasha_for_cyrill.jpg','rb'))
+            return
+
         combined_reply: str = get_weather(city_info_dict['city_name']) + "\n\n" + get_city_population_info(city) \
                                 + "\n\n" + get_random_event()
 
@@ -75,7 +81,7 @@ def get_weather(city_name: str) -> str:
 def runBot() -> None:
 
     try:
-        bot.infinity_polling()
+        bot.infinity_polling(20)
 
     except RuntimeError:
 
