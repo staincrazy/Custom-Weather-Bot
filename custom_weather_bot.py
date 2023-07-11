@@ -1,8 +1,8 @@
 import telebot
 
 from open_weather_map import weather_request
-from random_events import get_random_event, get_city_data
-from utils import getPrivateKey
+from api_utils import get_random_event, get_city_population_info
+from private_key_utils import getPrivateKey
 
 bot = telebot.TeleBot(getPrivateKey('private_telegram_key.txt'))
 city_info_dict = {}
@@ -26,7 +26,7 @@ def __reply_to(message: telebot.types.Message) -> None:
             bot.reply_to(message, 'Привет, Котик! Как дела?)')
             return
 
-        combined_reply: str = get_weather(city_info_dict['city_name']) + "\n\n" + get_city_data(city) \
+        combined_reply: str = get_weather(city_info_dict['city_name']) + "\n\n" + get_city_population_info(city) \
                                 + "\n\n" + get_random_event()
 
         bot.reply_to(message, combined_reply)

@@ -1,12 +1,28 @@
 import random
-
 import requests
-
-from utils import getPrivateKey
+from private_key_utils import getPrivateKey
 
 private_key = getPrivateKey('private_api_ninjas_key.txt')
 
-def get_city_data(city_name: str|None = None) -> str:
+def get_city_lng(city_name: str) -> int|None:
+
+    try:
+        return requests.get("https://api.api-ninjas.com/v1/city?name={}".format(city_name),
+                                headers={'X-Api-Key': private_key}).json()[0]['longitude']
+
+    except:
+        return None
+
+def get_city_lat(city_name: str) -> int|None:
+
+    try:
+        return requests.get("https://api.api-ninjas.com/v1/city?name={}".format(city_name),
+                            headers={'X-Api-Key': private_key}).json()[0]['latitude']
+
+    except:
+        return None
+
+def get_city_population_info(city_name: str|None = None) -> str:
 
     city_name = str(city_name)
 
@@ -42,14 +58,17 @@ def get_random_event(year: int|None = None) -> str:
     if len(response.json())>0:
         event = response.json()[0]['event']
 
-
     if event is None:
             return 'No fun facts this time...'
 
     return f'Did you know that in {year} - {event}'
 
 
-## This line of code can be used for requests testing
+###====================TEST CODE HERE======================###
+def code_test():
+    print('Paste here function you want to test')
+    print(get_city_population_info('Tbilisi'))
+
 
 if __name__ == '__main__':
-    print(get_city_data('Tbilisi'))
+    code_test()

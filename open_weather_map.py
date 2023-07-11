@@ -1,54 +1,26 @@
-from datetime import datetime
-from zoneinfo import ZoneInfo
-
 import requests
-
-from utils import getPrivateKey
+from get_time_zone_for_city import get_time_for_timezone
+from private_key_utils import getPrivateKey
 
 __temp = ''
 __temp_feels = ''
 
 
-def get_current_time() -> datetime|str:
-
-    time = datetime.now(tz=ZoneInfo('10800')).strftime("%H-%M")
-    return time
-
-
-def celsius_to_fahrenheit(t: float|int) -> float|int:
+def __celsius_to_fahrenheit(t: float | int) -> float | int:
 
     fahrenheit = (t * 9 / 5) + 32
-
     return fahrenheit
 
-
-def weather_request(city_name: str) -> str|None:
-
-    my_key = getPrivateKey('private_owm_key.txt')
-
-    url = f"https://api.openweathermap.org/data/2.5/weather?appid={my_key}&q={city_name}"
-
-    try:
-        return api_handler(url, city_name)
-
-    except TypeError:
-
-        return None
-
-
-def api_handler(url: str, city_name: str) -> str:
-
+def __api_handler(url: str, city_name: str) -> str:
     my_weather_request = requests.get(url).json()
-
-    print(my_weather_request)
 
     if not my_weather_request['cod'] == '404':
 
         getTemp = my_weather_request['main']['temp'] - 273.15
         getTemp_feels = my_weather_request['main']['feels_like'] - 273.15
 
-        fahrenheit_temp = str(celsius_to_fahrenheit(getTemp))[:4]
-        fahrenheit_feels_like = str(celsius_to_fahrenheit(getTemp_feels))[:4]
+        fahrenheit_temp = str(__celsius_to_fahrenheit(getTemp))[:4]
+        fahrenheit_feels_like = str(__celsius_to_fahrenheit(getTemp_feels))[:4]
 
         celsius_temp = str(getTemp)[:4]
         celsius_feels_like = str(getTemp_feels)[:4]
@@ -59,7 +31,7 @@ def api_handler(url: str, city_name: str) -> str:
         weather_description_json = my_weather_request['weather']
         weather_description = weather_description_json[0]['description']
 
-        return f'At: {get_current_time()} (UTC) in {city_name} current temperature is ' \
+        return f'At {get_time_for_timezone(city_name)} in {city_name} current temperature is ' \
                f'{celsius_temp} Celsius / {fahrenheit_temp} Fahrenheit ' \
                f'(feels like {celsius_feels_like} C / {fahrenheit_feels_like} F). ' \
                f' The weather is ' \
@@ -69,8 +41,30 @@ def api_handler(url: str, city_name: str) -> str:
         return "City not found. Please, try again."
 
 
-# Here you can test OWM endpoint directly
-# for example on line 63 use -  print(weather_report("London"))
+def weather_request(city_name: str) -> str|None:
+
+    my_key = getPrivateKey('private_owm_key.txt')
+
+    url = f"https://api.openweathermap.org/data/2.5/weather?appid={my_key}&q={city_name}"
+
+    try:
+        return __api_handler(url, city_name)
+
+    except TypeError:
+        return None
+
+
+
+
+
+
+
+
+###====================TEST CODE HERE======================###
+def code_test():
+    print('Paste here function you need to test')
+    print(weather_request('Manchester'))
+
 
 if __name__ == '__main__':
-    print(get_current_time())
+    code_test()
