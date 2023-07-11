@@ -1,25 +1,17 @@
-import datetime
-from typing import Any
 import telebot
-from random_events import get_random_picture, get_random_event, get_city_data
-from open_weather_map import weather_request
 
+from open_weather_map import weather_request
+from random_events import get_random_event, get_city_data
 from utils import getPrivateKey
 
 bot = telebot.TeleBot(getPrivateKey('private_telegram_key.txt'))
 city_info_dict = {}
 
 
-def __reply_to(message: telebot.types.Message, img_url: str|None = None) -> None:
+def __reply_to(message: telebot.types.Message) -> None:
 
     # To test input in real time, please, uncomment this line of code
     # print(message.text)
-
-    if img_url is None:
-        img_url = get_random_picture()
-
-    print(message.date)
-    print(message.location)
 
     try:
         city = message.text

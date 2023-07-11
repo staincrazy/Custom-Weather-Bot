@@ -28,12 +28,6 @@ def get_city_data(city_name: str|None = None) -> str:
             return f'No information was found for this city - "{city_name}" =/'
 
 
-def get_random_picture():
-
-    img_url = "https://random.imagecdn.app/500/150"
-
-    return img_url
-
 
 def get_random_event(year: int|None = None) -> str:
 
