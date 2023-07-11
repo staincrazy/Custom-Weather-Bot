@@ -37,6 +37,8 @@ def api_handler(url: str, city_name: str) -> str:
 
     my_weather_request = requests.get(url).json()
 
+    print(my_weather_request)
+
     if not my_weather_request['cod'] == '404':
 
         getTemp = my_weather_request['main']['temp'] - 273.15
@@ -68,4 +70,4 @@ def api_handler(url: str, city_name: str) -> str:
 # for example on line 63 use -  print(weather_report("London"))
 
 if __name__ == '__main__':
-    print(get_current_time())
+    print(weather_request('Holon'))

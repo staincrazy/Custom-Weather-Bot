@@ -1,3 +1,4 @@
+import datetime
 from typing import Any
 import telebot
 from random_events import get_random_picture, get_random_event, get_city_data
@@ -17,7 +18,8 @@ def __reply_to(message: telebot.types.Message, img_url: str|None = None) -> None
     if img_url is None:
         img_url = get_random_picture()
 
-    chat_id = message.chat.id
+    print(message.date)
+    print(message.location)
 
     try:
         city = message.text
@@ -26,6 +28,10 @@ def __reply_to(message: telebot.types.Message, img_url: str|None = None) -> None
 
         if city.lower() in ('orgrimar', 'Orgrimmar', 'orgrimmar', 'Orgri', 'Orgrimar'):
             bot.reply_to(message, 'FOR THE HORDE!!!')
+            return
+
+        elif city.lower() in ('лампочка', 'lampo4ka', 'lampochka'):
+            bot.reply_to(message, 'Привет, Котик! Как дела?)')
             return
 
         combined_reply: str = get_weather(city_info_dict['city_name']) + "\n\n" + get_city_data(city) \
