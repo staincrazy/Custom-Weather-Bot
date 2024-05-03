@@ -46,7 +46,7 @@ def get_random_event(year: int | None = None) -> str:
 
     try:
         e = requests.get(_url_years.format(year), headers={'X-Api-Key': private_key}).json()[0]['event']
-        return f'History minute: Did you know that in year: {year} - {e}'
+        return f'Did you know that in year: {year} - {e}'
     except Exception as e:
         print(f"Check the error {e}")
         return "Nothing to show this time"

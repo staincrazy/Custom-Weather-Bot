@@ -4,36 +4,19 @@ from api_utils import get_city_lng, get_city_lat
 from datetime import datetime
 
 
-def _get_timezone(city_name: str) -> str|None:
+def _get_timezone(city_name: str) -> str | None:
     tz = TimezoneFinder()
+    lng = get_city_lng(city_name)
+    lat = get_city_lat(city_name)
 
-    try:
-        lng = get_city_lng(city_name)
-    except:
-        lng = None
+    return tz.timezone_at(lng=lng, lat=lat) if None not in (lat, lng) else None
 
-    try:
-        lat = get_city_lat(city_name)
-    except:
-        lat = None
-
-    if None not in (lat, lng):
-        return tz.timezone_at(lng=lng, lat=lat)
-
-    else:
-        return None
-
-
-def __get_current_server_time() -> datetime | str:
-    return datetime.now().strftime("%H-%M")
 
 def get_time_for_timezone(city_name: str) -> str | None:
     zone = _get_timezone(city_name)
 
-    if zone is not None:
-        return datetime.now(tz=ZoneInfo(zone)).strftime("%H-%M")
-
-    return __get_current_server_time()
+    return datetime.now(tz=ZoneInfo(zone)).strftime("%H-%M") if zone is not None \
+        else datetime.now().strftime("%H-%M")
 
 
 ###====================TEST CODE HERE======================###
