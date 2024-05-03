@@ -1,6 +1,7 @@
 private_owm_key.txt
 private_telegram_key.txt
 private_api_ninjas_key.txt
+.venv
 
 __pycache__
 
