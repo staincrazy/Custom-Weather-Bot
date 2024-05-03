@@ -26,8 +26,9 @@ def _reply_to(message: telebot.types.Message) -> None:
             return
 
         combined_reply = ("Weather section: " + "\n" + get_weather(city) +
-                          "\n\n" "City population info: " + get_city_population_info(city) +
-                          "\n\n" "Random historical event section: " + get_random_event())
+                          "\n\n" "City population info: " + "\n" + get_city_population_info(city) +
+                          "\n\n" "Random historical event section: " + "\n" + get_random_event() +
+                          "\n\n" "Below we have a random image for you. Enjoy =) ")
 
         _bot.reply_to(message, combined_reply)
         get_random_image()
