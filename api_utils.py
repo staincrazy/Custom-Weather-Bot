@@ -1,73 +1,64 @@
 import random
 import requests
-from private_key_utils import getPrivateKey
+from private_key_utils import get_private_key
 
-private_key = getPrivateKey('private_api_ninjas_key.txt')
+private_key = get_private_key('private_api_ninjas_key.txt')
+_url_cities = "https://api.api-ninjas.com/v1/city?name={}"
+_url_years = "https://api.api-ninjas.com/v1/historicalevents?year={}"
 
-def get_city_lng(city_name: str) -> int|None:
 
+def get_city_lng(city_name: str) -> int | None:
     try:
-        return requests.get("https://api.api-ninjas.com/v1/city?name={}".format(city_name),
-                                headers={'X-Api-Key': private_key}).json()[0]['longitude']
-
-    except:
+        return requests.get(_url_cities.format(city_name), headers={'X-Api-Key': private_key}).json()[0]['longitude']
+    except Exception as e:
+        print(f"Log error {e}")
         return None
 
-def get_city_lat(city_name: str) -> int|None:
 
+def get_city_lat(city_name: str) -> int | None:
     try:
-        return requests.get("https://api.api-ninjas.com/v1/city?name={}".format(city_name),
-                            headers={'X-Api-Key': private_key}).json()[0]['latitude']
-
-    except:
+        return requests.get(_url_cities.format(city_name), headers={'X-Api-Key': private_key}).json()[0]['latitude']
+    except Exception as e:
+        print(f"Log error {e}")
         return None
 
-def get_city_population_info(city_name: str|None = None) -> str:
 
-    city_name = str(city_name)
+def get_city_population_info(city_name: str | None = None) -> str:
+    if city_name is None and not isinstance(city_name, str):
+        raise TypeError("City Name should be provided as string")
 
-    if city_name is not None:
+    try:
+        response = requests.get(_url_cities.format(city_name), headers={'X-Api-Key': private_key})
+    except Exception as e:
+        return f"Something is wrong. Please refer to the error {e}"
 
-        response = requests.get("https://api.api-ninjas.com/v1/city?name={}".format(city_name),
-                            headers={'X-Api-Key': private_key})
+    city_name = response.json()[0]['name']
+    country_name = response.json()[0]['country']
+    population = response.json()[0]['population']
 
-        try:
-
-            city_name = response.json()[0]['name']
-            country_name = response.json()[0]['country']
-            population = response.json()[0]['population']
-
-            return  f'Just in case you forgot: {city_name} is the city of {country_name} ' \
-                    f'with the population of {population} ppl'
-        except:
-
-            return f'No information was found for this city - "{city_name}" =/'
+    return f'Just in case you forgot: {city_name} is the city of {country_name} ' \
+           f'with the population of {population} ppl'
 
 
-
-def get_random_event(year: int|None = None) -> str:
-
+def get_random_event(year: int | None = None) -> str:
     if year is None:
-        year = random.randint(-351,2023)
+        year = random.randint(-351, 2023)
 
-    event: str|None = None
+    try:
+        e = requests.get(_url_years.format(year), headers={'X-Api-Key': private_key}).json()[0]['event']
+        return f'History minute: Did you know that in year: {year} - {e}' if len(e) > 0 else
+    except Exception as e:
+        print(f"Check the error {e}")
+        return "Nothing to show this time"
 
-    response = requests.get(f"https://api.api-ninjas.com/v1/historicalevents?year={year}",
-                            headers={'X-Api-Key': private_key})
 
-    if len(response.json())>0:
-        event = response.json()[0]['event']
-
-    if event is None:
-            return 'No fun facts this time...'
-
-    return f'Did you know that in {year} - {event}'
 
 
 ###====================TEST CODE HERE======================###
 def code_test():
     print('Paste here function you want to test')
     print(get_city_population_info('Tbilisi'))
+    print(get_random_event())
 
 
 if __name__ == '__main__':

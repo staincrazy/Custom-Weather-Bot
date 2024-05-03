@@ -4,8 +4,7 @@ from api_utils import get_city_lng, get_city_lat
 from datetime import datetime
 
 
-def __get_timezone(city_name: str) -> str|None:
-
+def _get_timezone(city_name: str) -> str|None:
     tz = TimezoneFinder()
 
     try:
@@ -19,25 +18,22 @@ def __get_timezone(city_name: str) -> str|None:
         lat = None
 
     if None not in (lat, lng):
-        return tz.timezone_at(lng = lng, lat = lat)
+        return tz.timezone_at(lng=lng, lat=lat)
 
     else:
         return None
 
-def __get_current_server_time() -> datetime|str:
 
-    time = datetime.now().strftime("%H-%M")
-    return time
+def __get_current_server_time() -> datetime | str:
+    return datetime.now().strftime("%H-%M")
 
-def get_time_for_timezone(city_name: str) -> str|None:
-
-    zone = __get_timezone(city_name)
+def get_time_for_timezone(city_name: str) -> str | None:
+    zone = _get_timezone(city_name)
 
     if zone is not None:
-        return datetime.now(tz = ZoneInfo(zone)).strftime("%H-%M")
+        return datetime.now(tz=ZoneInfo(zone)).strftime("%H-%M")
 
     return __get_current_server_time()
-
 
 
 ###====================TEST CODE HERE======================###

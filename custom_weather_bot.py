@@ -2,9 +2,9 @@ import telebot
 
 from open_weather_map import weather_request
 from api_utils import get_random_event, get_city_population_info
-from private_key_utils import getPrivateKey
+from private_key_utils import get_private_key
 
-bot = telebot.TeleBot(getPrivateKey('private_telegram_key.txt'))
+bot = telebot.TeleBot(get_private_key('private_telegram_key.txt'))
 city_info_dict = {}
 
 
