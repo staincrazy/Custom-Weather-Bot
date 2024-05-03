@@ -49,11 +49,10 @@ def weather_request(city_name: str) -> str:
 
 
 
-### ====================TEST CODE HERE====================== ###
 if __name__ == '__main__':
     def code_test():
         print('Paste here function you need to test')
-        print(weather_request("Milan"))
+        print(weather_request("Минск"))
 
 
     code_test()

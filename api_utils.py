@@ -1,10 +1,13 @@
 import random
+import shutil
+
 import requests
 from private_key_utils import get_private_key
 
 private_key = get_private_key('private_api_ninjas_key.txt')
 _url_cities = "https://api.api-ninjas.com/v1/city?name={}"
 _url_years = "https://api.api-ninjas.com/v1/historicalevents?year={}"
+_url_rand_image = "https://api.api-ninjas.com/v1/randomimage"  # ?category=nature"
 
 
 def get_city_lng(city_name: str) -> int | None:
@@ -52,14 +55,13 @@ def get_random_event(year: int | None = None) -> str:
         return "Nothing to show this time"
 
 
+def get_random_image():
+    response = requests.get(_url_rand_image, headers={'X-Api-Key': private_key, 'Accept': 'image/jpg'})
 
-
-###====================TEST CODE HERE======================###
-def code_test():
-    print('Paste here function you want to test')
-    print(get_city_population_info('Tbilisi'))
-    print(get_random_event())
+    if response.status_code == 200:
+        with open('img.jpg', 'wb') as out_file:
+            out_file.write(response.content)
 
 
 if __name__ == '__main__':
-    code_test()
+    print(get_random_image())

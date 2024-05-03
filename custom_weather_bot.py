@@ -1,7 +1,7 @@
 import telebot
 
 from open_weather_map import weather_request
-from api_utils import get_random_event, get_city_population_info
+from api_utils import get_random_event, get_city_population_info, get_random_image
 from private_key_utils import get_private_key
 
 
@@ -10,13 +10,13 @@ def _get_bot_inst():
 
 
 _bot = _get_bot_inst()
+
 preserved_words = ['orgrimar', 'Orgrimmar', 'orgrimmar', 'Orgri', 'Orgrimar', 'лампочка', 'lampo4ka', 'lampochka',
                    'deepthroatovo', 'assenburg', 'assachussats', 'missititty']
 
 
 def _reply_to(message: telebot.types.Message) -> None:
-    # To test input in real time, please, uncomment this line of code
-    # print(message.text)
+    print("Testing input messages: {} ".format(message.text))
 
     try:
         city = message.text
@@ -30,9 +30,12 @@ def _reply_to(message: telebot.types.Message) -> None:
                           "\n\n" "Random historical event section: " + get_random_event())
 
         _bot.reply_to(message, combined_reply)
+        get_random_image()
+        _bot.send_photo(message.chat.id, photo=open("img.jpg", 'rb'))
 
     except Exception as e:
-        _bot.reply_to(message, f'Oops, this error happened - {e}. Starting over...')
+        _bot.reply_to(message, f'Oops, something went wrong. Please, rty again ...')
+        print({e})
 
 
 @_bot.message_handler(func=lambda message: True)
@@ -40,7 +43,7 @@ def welcome_message(message: telebot.types.Message) -> None:
     if message.text.lower() in ('/start', '/help', 'start', 'help', 'hello'):
 
         msg = _bot.reply_to(message, "Hi, i'm weather bot. To check the weather in a desired city, "
-                                     "just type in a city name. Good luck!")
+                                     "just type in a city name in English. Good luck!")
 
         _bot.register_next_step_handler(msg, process_city_step)
 
