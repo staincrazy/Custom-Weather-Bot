@@ -17,14 +17,3 @@ def get_time_for_timezone(city_name: str) -> str | None:
 
     return datetime.now(tz=ZoneInfo(zone)).strftime("%H-%M") if zone is not None \
         else datetime.now().strftime("%H-%M")
-
-
-###====================TEST CODE HERE======================###
-def code_test():
-    print('Paste here function you want to test')
-    print(get_time_for_timezone('Jooisoas'))
-    print(get_time_for_timezone('London'))
-
-
-if __name__ == '__main__':
-    code_test()
