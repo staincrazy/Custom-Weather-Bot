@@ -1,5 +1,6 @@
 import telebot
 
+from error_logger import logEvent
 from open_weather_map import weather_request
 from api_utils import get_random_event, get_city_population_info, get_random_image
 from private_key_utils import get_private_key
@@ -35,8 +36,8 @@ def _reply_to(message: telebot.types.Message) -> None:
         _bot.send_photo(message.chat.id, photo=open("img.jpg", 'rb'))
 
     except Exception as e:
-        _bot.reply_to(message, f'Oops, something went wrong. Please, rty again ...')
-        print({e})
+        _bot.reply_to(message, f'Oops, nothing found ... Please, do not forget to use English characters only.')
+        logEvent(e.__cause__, _reply_to, user_input=message.text)
 
 
 @_bot.message_handler(func=lambda message: True)

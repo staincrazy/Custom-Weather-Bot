@@ -48,10 +48,9 @@ def weather_request(city_name: str) -> str:
     return _api_handler(url, city_name)
 
 
-
 if __name__ == '__main__':
     def code_test():
-        print('Paste here function you need to test')
+        ### 'Paste here function you need to test' ###
         print(weather_request("Минск"))
 
 
