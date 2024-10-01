@@ -7,7 +7,7 @@ from private_key_utils import get_private_key
 
 
 def _get_bot_inst():
-    return telebot.TeleBot(get_private_key('private_telegram_key.txt'))
+    return telebot.TeleBot(get_private_key('private_keys/private_telegram_key.txt'))
 
 
 _bot = _get_bot_inst()
