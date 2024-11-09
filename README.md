@@ -1,53 +1,118 @@
-# Project name: Telegram Weather Bot (Python 3.9)
+# Weather Assistant Bot 🌤️
 
-### This custom weather bot is implemented using public APIs - telebot and open weather map. 
-#### This instruction contains steps of how to configure and run the program locally
+A Telegram bot that provides weather information, city population data, random historical facts, and images. Built with Python using modern programming practices and OOP principles.
 
-#### How to set up and use:
+## Features
 
-0. Install python 3.9 and requirements.txt. 
-1. You will need to generate your private key from Open Weather Map and place it either in 
-txt file like "private_owm_key.txt" or directly in code in open_weather_map.py on line
-16:
+- 🌍 Current weather information for any city
+- 📊 City population statistics
+- 📚 Random historical facts with each request
+- 🖼️ Random images with each response
+- 🔒 Secure key management
+- 📝 User request logging
 
-```python
-def weather_request():
-    my_key = "<your_key>"
-    ...
-```
-or 
-```python
-def weather_request():
-    my_key = getPrivateKey('private_owm_key.txt')
-```
+## Prerequisites
 
-2. You will need to generate you private Telegram key and place it either in 
-txt file like "private_telegram_key.txt" or directly in code in custom_weather_bot.py on line
-6: 
+- Python 3.11 or higher
+- Telegram Bot Token (from [@BotFather](https://t.me/botfather))
+- OpenWeatherMap API key
+- API Ninjas key
 
-```python
+## Installation
 
-bot = telebot.TeleBot(getPrivateKey('private_telegram_key.txt'), parse_mode=None)
-
+1. Clone the repository:
+```bash
+git clone <your-repository-url>
+cd customTeleBot
 ```
 
-or 
-
-```python
-
-bot = telebot.TeleBot(getPrivateKey('<your_private_key>'), parse_mode=None)
+2. Create and activate virtual environment:
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows use: venv\Scripts\activate
 ```
 
-How to get your bot telegram key:
-![](how_to_register_your_bot.png)
+3. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
 
+4. Set up your private keys:
+   - Create a `private_keys` directory
+   - Add your API keys in separate files:
+     - `private_telegram_key.txt`: Your Telegram Bot Token
+     - `private_owm_key.txt`: OpenWeatherMap API key
+     - `private_api_ninjas_key.txt`: API Ninjas key
 
-3. After all is done you can navigate to custom_weather_bot.py at line 73 and
-run program.
+## Project Structure
 
+```
+customTeleBot/
+├── private_keys/
+│   ├── private_telegram_key.txt
+│   ├── private_owm_key.txt
+│   └── private_api_ninjas_key.txt
+├── CustomWeatherBot.py      # Main bot implementation
+├── open_weather_map.py      # Weather API integration
+├── api_utils.py            # API utilities
+├── error_logger.py         # Error logging
+├── KeyManagerUtils.py      # Secure key management
+└── requirements.txt
+```
 
-NOTE: 
-In current implementation each weather request is done within 3 steps.
-In future implementations this is planned to be fixed to 1 step.
+## Usage
 
-### Thanks and good luck.
+1. Start the bot:
+```bash
+python CustomWeatherBot.py
+```
+
+2. In Telegram, find your bot and start interaction:
+   - `/start` - Begin interaction with the bot
+   - `/help` - Show available commands
+   - Type any city name to get weather information
+   - `/stop` - Stop the bot
+
+## Bot Commands
+
+- `/start` - Initialize the bot and get welcome message
+- `/help` - Display help information
+- `/stop` - Stop the bot
+- Any city name - Get weather, population, and historical fact
+
+## Features in Detail
+
+### Weather Information
+- Current temperature (Celsius and Fahrenheit)
+- Weather condition description
+- "Feels like" temperature
+
+### City Information
+- Population statistics
+- Country information
+
+### Additional Features
+- Random historical facts with each weather request
+- Random images to accompany responses
+- Preserved word filtering
+- Error handling and logging
+
+## Security
+
+- Secure key management with proper file permissions
+- Private keys stored separately
+- Input validation and sanitization
+
+## Contributing
+
+Feel free to submit issues, fork the repository, and create pull requests for any improvements.
+
+## License
+
+[Your chosen license]
+
+## Acknowledgments
+
+- [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot)
+- [OpenWeatherMap API](https://openweathermap.org/api)
+- [API Ninjas](https://api-ninjas.com/)
