@@ -5,7 +5,7 @@ import requests
 from error_logger import logEvent
 from private_key_utils import get_private_key
 
-private_key = get_private_key('private_keys/private_api_ninjas_key.txt')
+private_key = get_private_key('../private_keys/private_api_ninjas_key.txt')
 _url_cities = "https://api.api-ninjas.com/v1/city?name={}"
 _url_years = "https://api.api-ninjas.com/v1/historicalevents?year={}"
 _url_rand_image = "https://api.api-ninjas.com/v1/randomimage"  # ?category=nature"
@@ -61,7 +61,7 @@ def get_random_image():
     response = requests.get(_url_rand_image, headers={'X-Api-Key': private_key, 'Accept': 'image/jpg'})
 
     if response.status_code == 200:
-        with open('img.jpg', 'wb') as out_file:
+        with open('../img.jpg', 'wb') as out_file:
             out_file.write(response.content)
 
 

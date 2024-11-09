@@ -1,6 +1,6 @@
 from zoneinfo import ZoneInfo
 from timezonefinder import TimezoneFinder
-from api_utils import get_city_lng, get_city_lat
+from legacy.api_utils import get_city_lng, get_city_lat
 from datetime import datetime
 
 

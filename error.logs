@@ -36,3 +36,18 @@ At 2024-05-04 08:42:35.988683: this event occurred None while calling <function 
 At 2024-05-04 08:45:20.355272: this event occurred None while calling <function _reply_to at 0x103537880> with the input ХолонХолонХолон
 
 At 2024-05-04 08:47:10.515958: this event occurred None while calling <function _reply_to at 0x1063cf880> with the input uyuh
+2024-11-08 21:44:22 - ERROR - Function: get_city_data | User Input: London
+2024-11-08 21:44:22 - ERROR - Function: get_coordinates | User Input: London
+2024-11-08 21:44:22 - ERROR - Function: get_city_data | User Input: Tokyo
+2024-11-08 21:44:22 - ERROR - Function: get_coordinates | User Input: Tokyo
+2024-11-08 21:44:22 - ERROR - Function: get_city_data | User Input: London
+2024-11-08 21:44:22 - ERROR - Function: get_coordinates | User Input: London
+2024-11-08 21:44:22 - ERROR - Function: get_city_data | User Input: Tokyo
+2024-11-08 21:44:22 - ERROR - Function: get_coordinates | User Input: Tokyo
+2024-11-08 21:44:22 - ERROR - Function: get_city_data | User Input: New York
+2024-11-08 21:44:22 - ERROR - Function: get_coordinates | User Input: New York
+2024-11-09 09:47:43 - ERROR - Function: get_city_data | User Input: London
+2024-11-09 09:47:43 - ERROR - Function: get_coordinates | User Input: London
+2024-11-09 13:52:00 - ERROR - Function: get_city_data | User Input: Orgrommar
+2024-11-09 13:52:00 - ERROR - Function: get_population_info | User Input: Orgrommar
+2024-11-09 14:46:59 - ERROR - Function: get_random_event | User Input: -288

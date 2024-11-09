@@ -1,5 +1,5 @@
 import requests
-from get_time_zone_for_city import get_time_for_timezone
+from legacy.get_time_zone_for_city import get_time_for_timezone
 from private_key_utils import get_private_key
 
 _t = ''
@@ -43,7 +43,7 @@ def _api_handler(url: str | None = None, city_name: str | None = None) -> str:
 
 
 def weather_request(city_name: str) -> str:
-    my_key = get_private_key('private_keys/private_owm_key.txt')
+    my_key = get_private_key('../private_keys/private_owm_key.txt')
     url = f"https://api.openweathermap.org/data/2.5/weather?appid={my_key}&q={city_name}"
     return _api_handler(url, city_name)
 
