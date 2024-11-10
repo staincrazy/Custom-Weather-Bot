@@ -9,11 +9,16 @@ from pathlib import Path
 @dataclass
 class LogConfig:
     """Configuration for logger"""
-    log_file: str = "error.logs"
+    base_logs_folder: str = 'error_logs'
+    log_file: str = "legacy/legacy_error.logs"
     log_format: str = "%(asctime)s - %(levelname)s - %(message)s"
     date_format: str = "%Y-%m-%d %H:%M:%S"
     encoding: str = "utf-8"
     level: int = logging.ERROR
+
+    @property
+    def error_logs_path(self) -> str:
+        return str(Path(self.base_logs_folder)/self.log_file)
 
 
 class EventLogger:
@@ -32,7 +37,7 @@ class EventLogger:
 
         # Create handlers
         file_handler = logging.FileHandler(
-            self.config.log_file,
+            self.config.error_logs_path,
             encoding=self.config.encoding
         )
         file_handler.setLevel(self.config.level)
