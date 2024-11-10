@@ -10,7 +10,7 @@ from pathlib import Path
 class LogConfig:
     """Configuration for logger"""
     base_logs_folder: str = 'error_logs'
-    log_file: str = "legacy/legacy_error.logs"
+    log_file: str = "error.logs"
     log_format: str = "%(asctime)s - %(levelname)s - %(message)s"
     date_format: str = "%Y-%m-%d %H:%M:%S"
     encoding: str = "utf-8"
