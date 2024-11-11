@@ -1,3 +1,11 @@
 2024-11-10 18:26:18 - ERROR - Function: get_city_data | User Input: l1iuodhjas
 2024-11-10 18:26:18 - ERROR - Function: get_population_info | User Input: l1iuodhjas
 2024-11-10 18:30:51 - ERROR - Function: get_random_event | User Input: -137
+2024-11-10 18:58:26 - ERROR - Function: get_city_data | User Input: 090
+2024-11-10 18:58:26 - ERROR - Function: get_population_info | User Input: 090
+2024-11-11 21:27:51 - ERROR - Function: get_city_data | User Input: bdkju23
+2024-11-11 21:27:51 - ERROR - Function: get_population_info | User Input: bdkju23
+2024-11-11 21:28:31 - ERROR - Function: get_city_data | User Input: da123
+2024-11-11 21:28:31 - ERROR - Function: get_population_info | User Input: da123
+2024-11-11 21:28:32 - ERROR - Function: get_random_event | User Input: 1039
+2024-11-11 21:39:45 - ERROR - Function: get_random_event | User Input: 916

@@ -1,16 +1,11 @@
-from dataclasses import dataclass
 from datetime import datetime
 from typing import Optional, Tuple
 from zoneinfo import ZoneInfo
+
 from timezonefinder import TimezoneFinder
+
 from ApiUtils import APIService
-
-
-@dataclass
-class TimezoneConfig:
-    """Configuration for timezone service"""
-    default_time_format: str = "%H-%M"
-    default_timezone: str = "UTC"
+from models.TimezoneConfig import TimezoneConfig
 
 
 class TimezoneService:
