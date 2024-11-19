@@ -2,8 +2,8 @@ from typing import Optional, Dict, Any, Tuple
 
 import requests
 
-from KeyManagerUtils import KeyManager
-from TimeZoneService import TimezoneService
+from utils.KeyManagerUtils import KeyManager
+from services.TimeZoneService import TimezoneService
 from models.WeatherConfig import WeatherConfig
 
 

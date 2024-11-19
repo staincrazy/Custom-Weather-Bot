@@ -4,7 +4,7 @@ from zoneinfo import ZoneInfo
 
 from timezonefinder import TimezoneFinder
 
-from ApiUtils import APIService
+from utils.ApiUtils import APIService
 from models.TimezoneConfig import TimezoneConfig
 
 

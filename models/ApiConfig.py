@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Dict
 
-from KeyManagerUtils import get_private_key
+from utils.KeyManagerUtils import get_private_key
 
 
 @dataclass

@@ -14,3 +14,21 @@
 2024-11-14 11:05:55 - ERROR - Function: get_random_event | User Input: -246
 2024-11-18 19:35:16 - ERROR - Function: get_random_event | User Input: 803
 2024-11-19 18:31:54 - ERROR - Function: get_random_event | User Input: 518
+2024-11-19 18:37:56 - ERROR - Function: get_city_data | User Input: Taras Nabad
+2024-11-19 18:37:56 - ERROR - Function: get_population_info | User Input: Taras Nabad
+2024-11-19 18:37:59 - ERROR - Function: get_random_image
+2024-11-19 18:37:59 - ERROR - Function: handle_city | User Input: Taras Nabad
+2024-11-19 18:38:28 - ERROR - Function: get_random_event | User Input: -109
+2024-11-19 18:38:29 - ERROR - Function: get_random_image
+2024-11-19 18:38:29 - ERROR - Function: handle_city | User Input: Leeds
+2024-11-19 18:39:28 - ERROR - Function: get_random_image
+2024-11-19 18:43:39 - ERROR - Function: get_city_data | User Input: Brugge
+2024-11-19 18:43:39 - ERROR - Function: get_population_info | User Input: Brugge
+2024-11-19 18:43:40 - ERROR - Function: get_random_event | User Input: 950
+2024-11-19 18:43:41 - ERROR - Function: handle_city | User Input: Brugge
+2024-11-19 18:44:17 - ERROR - Function: get_city_data | User Input: Tel-Aviv
+2024-11-19 18:44:17 - ERROR - Function: get_population_info | User Input: Tel-Aviv
+2024-11-19 18:46:10 - ERROR - Function: get_city_data | User Input: Brugges
+2024-11-19 18:46:10 - ERROR - Function: get_population_info | User Input: Brugges
+2024-11-19 18:48:02 - ERROR - Function: get_city_data | User Input: Brugges
+2024-11-19 19:00:25 - ERROR - Function: get_random_event | User Input: 1109

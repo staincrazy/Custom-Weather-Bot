@@ -8,11 +8,11 @@ from telegram.ext import (
     filters
 )
 
-from ErrorLogger import logEvent
-from UserRequest import UserRequestLogger
+from utils.ErrorLogger import logEvent
+from utils.UserRequest import UserRequestLogger
 from WeatherService import OpenWeatherMapAPI
-from ApiUtils import APIService
-from KeyManagerUtils import KeyManager
+from utils.ApiUtils import APIService
+from utils.KeyManagerUtils import KeyManager
 from models.BotConfig import BotConfig
 
 

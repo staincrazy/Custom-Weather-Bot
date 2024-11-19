@@ -2,9 +2,10 @@ import random
 from typing import Optional, Dict, Any
 
 import requests
+from mypy.types import names
 from requests import Response
 
-from ErrorLogger import logEvent
+from utils.ErrorLogger import logEvent
 from models.ApiConfig import ApiConfig
 
 
@@ -37,6 +38,25 @@ class ApiClient:
 class CityAPI(ApiClient):
     """Handle city-related API requests"""
 
+    def _format_city_response(self, city_data) -> Optional[str]:
+
+        is_capital: str = 'not capital'
+
+        if city_data is None:
+            return "There is no such a city"
+
+        if city_data['is_capital']:
+            is_capital = 'capital'
+
+        return (
+            "Just some cold facts: "
+            f"{city_data['name']} is {is_capital} of {city_data['country']} with "
+            f"the population of {city_data['population']} (but that's not for sure, "
+            f"because we're using free API :D) people and on the map can be found in "
+            f"{city_data['region']}!"
+        )
+
+
     def get_city_data(self, city_name: str) -> Dict[str, Any]:
         """Get comprehensive city data"""
         try:
@@ -62,13 +82,11 @@ class CityAPI(ApiClient):
 
         try:
             city_data = self.get_city_data(city_name)
-            return (
-                f"Just in case you forgot: {city_data['name']} is the city of "
-                f"{city_data['country']} with the population of {city_data['population']} ppl"
-            )
+            return self._format_city_response(city_data)
+
         except Exception as e:
             logEvent(e.__cause__, self.get_population_info, user_input=city_name)
-            return f"Something is wrong. Please refer to the error {str(e)}"
+            return f"Something is wrong. Are you sure there is such a city? Can you check the map please?"
 
 
 class HistoricalAPI(ApiClient):
@@ -143,3 +161,4 @@ if __name__ == '__main__':
     # Example usage
     api_service = APIService()
     print(api_service.get_random_image())
+    print(api_service.get_city_population_info('London'))
