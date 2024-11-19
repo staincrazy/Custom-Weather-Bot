@@ -61,7 +61,7 @@ def get_random_image():
     response = requests.get(_url_rand_image, headers={'X-Api-Key': private_key, 'Accept': 'image/jpg'})
 
     if response.status_code == 200:
-        with open('../img.jpg', 'wb') as out_file:
+        with open('../media/img.jpg', 'wb') as out_file:
             out_file.write(response.content)
 
 

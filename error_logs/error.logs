@@ -9,3 +9,8 @@
 2024-11-11 21:28:31 - ERROR - Function: get_population_info | User Input: da123
 2024-11-11 21:28:32 - ERROR - Function: get_random_event | User Input: 1039
 2024-11-11 21:39:45 - ERROR - Function: get_random_event | User Input: 916
+2024-11-14 11:05:54 - ERROR - Function: get_city_data | User Input: Lubava
+2024-11-14 11:05:54 - ERROR - Function: get_population_info | User Input: Lubava
+2024-11-14 11:05:55 - ERROR - Function: get_random_event | User Input: -246
+2024-11-18 19:35:16 - ERROR - Function: get_random_event | User Input: 803
+2024-11-19 18:31:54 - ERROR - Function: get_random_event | User Input: 518

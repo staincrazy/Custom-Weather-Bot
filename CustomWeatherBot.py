@@ -73,7 +73,7 @@ class WeatherBot:
 
             # Get and send random image
             self.api_service.get_random_image()
-            await update.message.reply_photo(photo=open("img.jpg", 'rb'))
+            await update.message.reply_photo(photo=open("media/img.jpg", 'rb'))
 
         except Exception as e:
             await update.message.reply_text(self.config.messages['error'])

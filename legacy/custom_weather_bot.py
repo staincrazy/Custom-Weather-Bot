@@ -33,7 +33,7 @@ def _reply_to(message: telebot.types.Message) -> None:
 
         _bot.reply_to(message, combined_reply)
         get_random_image()
-        _bot.send_photo(message.chat.id, photo=open("../img.jpg", 'rb'))
+        _bot.send_photo(message.chat.id, photo=open("../media/img.jpg", 'rb'))
 
     except Exception as e:
         _bot.reply_to(message, f'Oops, nothing found ... Please, do not forget to use English characters only.')

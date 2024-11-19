@@ -101,7 +101,7 @@ class ImageAPI(ApiClient):
                 extra_headers={'Accept': 'image/jpg'}
             )
 
-            with open('img.jpg', 'wb') as out_file:
+            with open('media/img.jpg', 'wb') as out_file:
                 out_file.write(response.content)
             return True
         except Exception as e:
