@@ -37,7 +37,7 @@ class KeyManager:
     @lru_cache(maxsize=32)
     def get_key(self, filename: str, strip: bool = True) -> str:
         """
-        Get private key from file
+        Get private key from environment variable or file
 
         Args:
             filename: Name of the key file
@@ -51,6 +51,19 @@ class KeyManager:
             PermissionError: If key file has incorrect permissions
             ValueError: If key file is empty or invalid
         """
+        # Map filenames to environment variable names
+        env_vars = {
+            'private_telegram_key.txt': 'TELEGRAM_BOT_TOKEN',
+            'private_owm_key.txt': 'OPENWEATHER_API_KEY',
+            'private_api_ninjas_key.txt': 'API_NINJAS_KEY'
+        }
+
+        # Check environment variable first
+        env_var = env_vars.get(filename)
+        if env_var and os.environ.get(env_var):
+            return os.environ[env_var]
+
+        # Fallback to file
         key_path = self._resolve_key_path(filename)
         self._validate_key_file(key_path)
 
@@ -59,7 +72,6 @@ class KeyManager:
             return key.strip() if strip else key
         except Exception as e:
             raise ValueError(f"Failed to read key file: {filename}") from e
-
     def _resolve_key_path(self, filename: str) -> Path:
         """Resolve full path to key file"""
         if os.path.isabs(filename):

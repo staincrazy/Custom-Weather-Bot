@@ -32,3 +32,4 @@
 2024-11-19 18:46:10 - ERROR - Function: get_population_info | User Input: Brugges
 2024-11-19 18:48:02 - ERROR - Function: get_city_data | User Input: Brugges
 2024-11-19 19:00:25 - ERROR - Function: get_random_event | User Input: 1109
+2024-11-30 08:20:37 - ERROR - Function: get_random_event | User Input: 164
