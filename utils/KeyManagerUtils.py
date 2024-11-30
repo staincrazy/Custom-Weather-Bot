@@ -72,6 +72,7 @@ class KeyManager:
             return key.strip() if strip else key
         except Exception as e:
             raise ValueError(f"Failed to read key file: {filename}") from e
+
     def _resolve_key_path(self, filename: str) -> Path:
         """Resolve full path to key file"""
         if os.path.isabs(filename):
