@@ -17,10 +17,15 @@ class KeyManager:
         self._validate_keys_directory()
 
     def _validate_keys_directory(self) -> None:
-        """Ensure keys directory exists and has proper permissions"""
+        """Ensure keys directory exists and has proper permissions only if needed"""
+        # Skip validation if using environment variables
+        if all(key in os.environ for key in ['TELEGRAM_BOT_TOKEN', 'OPENWEATHER_API_KEY', 'API_NINJAS_KEY']):
+            return
+
+        # Only validate directory if we need to use files
         if not self._keys_path.exists():
             raise FileNotFoundError(
-                f"Keys directory not found: {self._keys_path}"
+                f"Keys directory not found: {self._keys_path} and environment variables not set"
             )
 
         # Check directory permissions (on Unix-like systems)

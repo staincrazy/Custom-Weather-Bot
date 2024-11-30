@@ -2,6 +2,7 @@ private_owm_key.txt
 private_telegram_key.txt
 private_api_ninjas_key.txt
 legacy/legacy_error.logs
+
 /private_keys
 /logs
 .venv
