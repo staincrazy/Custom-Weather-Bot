@@ -10,7 +10,7 @@ from telegram.ext import (
 
 from utils.ErrorLogger import logEvent
 from utils.UserRequest import UserRequestLogger
-from WeatherService import OpenWeatherMapAPI
+from services.WeatherService import OpenWeatherMapAPI
 from utils.ApiUtils import APIService
 from utils.KeyManagerUtils import KeyManager
 from models.BotConfig import BotConfig

@@ -1,1 +1,1 @@
-web: python CustomWeatherBot.py
+web: python run.py
