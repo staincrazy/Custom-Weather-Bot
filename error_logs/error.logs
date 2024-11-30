@@ -36,3 +36,5 @@
 2024-11-30 09:26:14 - ERROR - Function: get_city_data | User Input: Mianmi
 2024-11-30 09:26:14 - ERROR - Function: get_population_info | User Input: Mianmi
 2024-11-30 09:26:14 - ERROR - Function: get_random_event | User Input: 1047
+2024-11-30 10:49:39 - ERROR - Function: get_random_event | User Input: -326
+2024-11-30 11:00:34 - ERROR - Function: get_random_event | User Input: 516

@@ -109,22 +109,19 @@ class HistoricalAPI(ApiClient):
 class ImageAPI(ApiClient):
     """Handle random image API requests"""
 
-    def get_random_image(self, category: Optional[str] = None) -> bool:
-        """Download random image and save to file"""
+    def get_random_image(self, category: Optional[str] = None) -> Optional[bytes]:
+        """Get random image data directly"""
         try:
             params = {'category': category} if category else None
             response = self._make_request(
-                'randomimage',
+                endpoint='randomimage',
                 params=params,
                 extra_headers={'Accept': 'image/jpg'}
             )
-
-            with open('media/img.jpg', 'wb') as out_file:
-                out_file.write(response.content)
-            return True
+            return response.content if response.ok else None
         except Exception as e:
             logEvent(e.__cause__, self.get_random_image)
-            return False
+            return None
 
 
 class APIService:
